@@ -103,7 +103,7 @@ musicBtn.innerHTML="🔇";
 Countdown
 ==========================*/
 
-const weddingDate=new Date("2026-08-28T20:00:00").getTime();
+const weddingDate=new Date("2026-10-07T20:00:00").getTime();
 
 function updateCountdown(){
 
