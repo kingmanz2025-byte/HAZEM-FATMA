@@ -604,30 +604,25 @@ function stopInvitationAutoScroll(){
 }
 
 function startInvitationAutoScroll(){
-  const target = document.getElementById("guest-wishes");
-  if(!target) return;
+  stopInvitationAutoScroll();
 
+  // Scroll all the way to the end of the invitation, not just to the wishes section.
   const startY = window.scrollY || document.documentElement.scrollTop || 0;
-  const targetY = Math.max(
+  const maxY = Math.max(
     0,
-    target.getBoundingClientRect().top + window.scrollY - 12
+    document.documentElement.scrollHeight - window.innerHeight
   );
-  const distance = targetY - startY;
+  const distance = maxY - startY;
 
   if(distance < 30) return;
 
   invitationAutoScrolling = true;
 
-  /*
-    Reading pace:
-    ~15 pixels/second = deliberately slow, so the guest can actually
-    read the sections while the page moves.
-  */
-  const pixelsPerSecond = 80;
-  const duration = Math.max(18000, (distance / pixelsPerSecond) * 1000);
+  // Slow cinematic reading speed.
+  const pixelsPerSecond = 35;
+  const duration = Math.max(30000, (distance / pixelsPerSecond) * 1000);
   const startTime = performance.now();
 
-  // Very gentle start, then almost linear movement.
   function easeReading(t){
     if(t < 0.08){
       const x = t / 0.08;
@@ -651,7 +646,7 @@ function startInvitationAutoScroll(){
     }else{
       invitationAutoScrolling = false;
       invitationAutoScroll = null;
-      window.scrollTo(0, targetY);
+      window.scrollTo(0, maxY);
     }
   }
 
