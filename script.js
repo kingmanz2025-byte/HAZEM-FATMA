@@ -619,7 +619,7 @@ function startInvitationAutoScroll(){
   invitationAutoScrolling = true;
 
   // Slow cinematic reading speed.
-  const pixelsPerSecond = 35;
+  const pixelsPerSecond = 55;
   const duration = Math.max(30000, (distance / pixelsPerSecond) * 1000);
   const startTime = performance.now();
 
